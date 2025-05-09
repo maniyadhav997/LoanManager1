@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Seed initial users (only if the database is empty)
 const seedUsers = async () => {
-  const { User } = require('./models/user'); // Import User here to ensure it's defined
+  const { User } = require('./Models/user'); // Import User here to ensure it's defined
   const bcrypt = require('bcryptjs');
 
   const userCount = await User.countDocuments();

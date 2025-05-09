@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { createApplication, getApplicationsByUserId, getAllApplications, updateApplicationStatus } = require('../models/application');
+const { createApplication, getApplicationsByUserId, getAllApplications, updateApplicationStatus } = require('../Models/application');
 
 const router = express.Router();
 
