@@ -1,0 +1,19 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+
+# SQLite database file
+loan_manager.db
+
+# Build and distribution files (if applicable)
+dist/
+build/
+
+# Editor and OS files
+.DS_Store
+.vscode/
+*.log
