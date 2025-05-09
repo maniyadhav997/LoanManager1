@@ -1,16 +1,20 @@
-const db = require('../db');
-const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 
-const findUserByUsername = (username) => {
-  const stmt = db.prepare('SELECT * FROM users WHERE username = ?');
-  return stmt.get(username);
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ['user', 'admin', 'verifier'], required: true },
+});
+
+const User = mongoose.model('User', userSchema);
+
+const findUserByUsername = async (username) => {
+  return await User.findOne({ username });
 };
 
-const createUser = (username, password, role) => {
-  const hashedPassword = bcrypt.hashSync(password, 10);
-  const stmt = db.prepare('INSERT INTO users (username, password, role) VALUES (?, ?, ?)');
-  const info = stmt.run(username, hashedPassword, role);
-  return { id: info.lastInsertRowid, username, role };
+const createUser = async (username, password, role) => {
+  const hashedPassword = require('bcryptjs').hashSync(password, 10);
+  return await User.create({ username, password: hashedPassword, role });
 };
 
-module.exports = { findUserByUsername, createUser };
+module.exports = { User, findUserByUsername, createUser };

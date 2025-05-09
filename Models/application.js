@@ -1,35 +1,33 @@
-const db = require('../db');
+const mongoose = require('mongoose');
 
-const createApplication = (app) => {
-  const stmt = db.prepare(`
-    INSERT INTO applications (userId, fullName, amount, tenure, employmentStatus, reason, employmentAddress)
-    VALUES (?, ?, ?, ?, ?, ?, ?)
-  `);
-  const info = stmt.run(
-    app.userId,
-    app.fullName,
-    app.amount,
-    app.tenure,
-    app.employmentStatus,
-    app.reason,
-    app.employmentAddress
-  );
-  return { ...app, id: info.lastInsertRowid };
+const applicationSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  fullName: { type: String, required: true },
+  amount: { type: Number, required: true },
+  tenure: { type: Number, required: true },
+  employmentStatus: { type: String, required: true },
+  reason: { type: String, required: true },
+  employmentAddress: { type: String, required: true },
+  status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
+  createdAt: { type: Date, default: Date.now },
+});
+
+const Application = mongoose.model('Application', applicationSchema);
+
+const createApplication = async (app) => {
+  return await Application.create(app);
 };
 
-const getApplicationsByUserId = (userId) => {
-  const stmt = db.prepare('SELECT * FROM applications WHERE userId = ?');
-  return stmt.all(userId);
+const getApplicationsByUserId = async (userId) => {
+  return await Application.find({ userId }).populate('userId', 'username');
 };
 
-const getAllApplications = () => {
-  const stmt = db.prepare('SELECT applications.*, users.username FROM applications JOIN users ON applications.userId = users.id');
-  return stmt.all();
+const getAllApplications = async () => {
+  return await Application.find().populate('userId', 'username');
 };
 
-const updateApplicationStatus = (id, status) => {
-  const stmt = db.prepare('UPDATE applications SET status = ? WHERE id = ?');
-  stmt.run(status, id);
+const updateApplicationStatus = async (id, status) => {
+  return await Application.findByIdAndUpdate(id, { status }, { new: true });
 };
 
 module.exports = { createApplication, getApplicationsByUserId, getAllApplications, updateApplicationStatus };

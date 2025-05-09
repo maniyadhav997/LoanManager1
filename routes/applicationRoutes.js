@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const { createApplication, getApplicationsByUserId, getAllApplications, updateApplicationStatus } = require('../Models/application');
+const { createApplication, getApplicationsByUserId, getAllApplications, updateApplicationStatus } = require('../models/application');
 
 const router = express.Router();
 
@@ -19,7 +19,7 @@ const authenticate = (req, res, next) => {
 };
 
 // POST: Submit a new application (User only)
-router.post('/submit-application', authenticate, (req, res) => {
+router.post('/submit-application', authenticate, async (req, res) => {
   if (req.user.role !== 'user') {
     return res.status(403).json({ error: 'Only users can submit applications' });
   }
@@ -31,7 +31,7 @@ router.post('/submit-application', authenticate, (req, res) => {
   }
 
   try {
-    const application = createApplication({
+    const application = await createApplication({
       userId: req.user.id,
       fullName,
       amount: parseFloat(amount),
@@ -46,17 +46,14 @@ router.post('/submit-application', authenticate, (req, res) => {
   }
 });
 
-// GET: Retrieve applications for the logged-in user (User) or all applications (Admin)
-router.get('/applications', authenticate, (req, res) => {
+// GET: Retrieve applications for the logged-in user (User) or all applications (Admin/Verifier)
+router.get('/applications', authenticate, async (req, res) => {
   try {
-    if (req.user.role === 'admin') {
-      const applications = getAllApplications();
+    if (req.user.role === 'admin' || req.user.role === 'verifier') {
+      const applications = await getAllApplications();
       res.json(applications);
     } else if (req.user.role === 'user') {
-      const applications = getApplicationsByUserId(req.user.id);
-      res.json(applications);
-    } else if (req.user.role === 'verifier') {
-      const applications = getAllApplications();
+      const applications = await getApplicationsByUserId(req.user.id);
       res.json(applications);
     } else {
       res.status(403).json({ error: 'Unauthorized' });
@@ -67,7 +64,7 @@ router.get('/applications', authenticate, (req, res) => {
 });
 
 // PUT: Update application status (Verifier only)
-router.put('/applications/:id', authenticate, (req, res) => {
+router.put('/applications/:id', authenticate, async (req, res) => {
   if (req.user.role !== 'verifier') {
     return res.status(403).json({ error: 'Only verifiers can update application status' });
   }
@@ -80,8 +77,8 @@ router.put('/applications/:id', authenticate, (req, res) => {
   }
 
   try {
-    updateApplicationStatus(id, status);
-    res.json({ message: 'Application status updated' });
+    const updatedApplication = await updateApplicationStatus(id, status);
+    res.json({ message: 'Application status updated', application: updatedApplication });
   } catch (error) {
     res.status(500).json({ error: 'Failed to update status' });
   }

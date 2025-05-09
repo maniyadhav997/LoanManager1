@@ -1,14 +1,14 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { findUserByUsername } = require('../Models/user');
+const { findUserByUsername } = require('../models/user');
 
 const router = express.Router();
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  const user = findUserByUsername(username);
+  const user = await findUserByUsername(username);
   if (!user) {
     return res.status(400).json({ error: 'Invalid username or password' });
   }
@@ -18,7 +18,7 @@ router.post('/login', (req, res) => {
     return res.status(400).json({ error: 'Invalid username or password' });
   }
 
-  const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
   res.json({ token, role: user.role });
 });
 
