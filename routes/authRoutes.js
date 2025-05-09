@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { findUserByUsername } = require('../Models/user');
+const { findUserByUsername } = require('../models/user');
 
 const router = express.Router();
 
@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
   }
 
   const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  res.json({ token, role: user.role });
+  res.json({ token, role: user.role, username: user.username }); // Add username to the response
 });
 
 module.exports = router;
