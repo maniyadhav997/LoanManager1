@@ -51,14 +51,17 @@ router.get('/applications', authenticate, async (req, res) => {
   try {
     if (req.user.role === 'admin' || req.user.role === 'verifier') {
       const applications = await getAllApplications();
+      //console.log('Applications for admin/verifier:', applications); // Debug log
       res.json(applications);
     } else if (req.user.role === 'user') {
       const applications = await getApplicationsByUserId(req.user.id);
+      //console.log('Applications for user:', applications); // Debug log
       res.json(applications);
     } else {
       res.status(403).json({ error: 'Unauthorized' });
     }
   } catch (error) {
+    console.error('Error fetching applications:', error);
     res.status(500).json({ error: 'Failed to fetch applications' });
   }
 });
@@ -78,8 +81,12 @@ router.put('/applications/:id', authenticate, async (req, res) => {
 
   try {
     const updatedApplication = await updateApplicationStatus(id, status);
+    if (!updatedApplication) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
     res.json({ message: 'Application status updated', application: updatedApplication });
   } catch (error) {
+    console.error('Error updating application status:', error);
     res.status(500).json({ error: 'Failed to update status' });
   }
 });
