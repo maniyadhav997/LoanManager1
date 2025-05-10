@@ -1,0 +1,94 @@
+.verifier-dashboard {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between username and icon */
+}
+
+.profile-icon {
+  font-size: 24px; /* Adjust icon size */
+}
+
+h2 {
+  font-size: 24px;
+  margin: 0;
+}
+
+h3 {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  background-color: #007bff; /* Blue background for buttons */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Status background colors */
+.status-green {
+  background-color: #d4edda; /* Light green */
+  color: #155724; /* Dark green text */
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.status-red {
+  background-color: #f8d7da; /* Light red */
+  color: #721c24; /* Dark red text */
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.status-yellow {
+  background-color: #fff3cd; /* Light yellow */
+  color: #856404; /* Dark yellow text */
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
