@@ -1,7 +1,3 @@
-
----
-
-```markdown
 # LoanManager
 
 LoanManager is a full-stack web application for managing loan applications. Users can apply for loans, admins can view all applications, and verifiers can approve or reject applications. The backend is built with **Node.js**, **Express**, and **MongoDB**, while the frontend is built with **React**.
