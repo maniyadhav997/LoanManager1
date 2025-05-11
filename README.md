@@ -1,11 +1,10 @@
-LoanManager
+# LoanManager
 
 LoanManager is a full-stack web application for managing loan applications. Users can apply for loans, admins can view all applications, and verifiers can approve or reject applications. The backend is built with Node.js, Express, and MongoDB, while the frontend is built with React.
 
 ## Repository Structure
 
 The repository contains both the backend and frontend code in the following structure:
-
 LoanManager_backend/
 ├── models/           # Backend models (Mongoose schemas)
 ├── routes/           # Backend API routes
@@ -18,6 +17,7 @@ LoanManager_backend/
 │   └── ...
 ├── .gitignore
 └── README.md
+
 
 ## Features
 
@@ -40,37 +40,28 @@ Before running the project, ensure you have the following installed:
 
 ### 1. Clone the Repository
 
-```bash
 git clone https://github.com/maniyadhav997/LoanManager1.git
 cd LoanManager1
-
 2. Backend Setup
-Install Backend Dependencies:
-bash
+Install Backend Dependencies
 
 npm install
-
 Set Up Environment Variables:
 Create a .env file in the LoanManager_backend directory:
-bash
 
 echo. > .env
-
 Add the following environment variables to .env:
 
 MONGO_URI=<your-mongodb-uri>
 JWT_SECRET=<your-jwt-secret>
 PORT=5000
-
 Replace <your-mongodb-uri> with your MongoDB connection string (e.g., from MongoDB Atlas).
 
 Replace <your-jwt-secret> with a secure secret key for JWT (e.g., a random string).
 
 Run the Backend:
-bash
 
 node server.js
-
 The backend should start on http://localhost:5000.
 
 You should see:
@@ -78,23 +69,14 @@ You should see:
 Connected to MongoDB
 Users seeded successfully
 Server running on port 5000
-
 3. Frontend Setup
 Navigate to the Frontend Directory:
-bash
-
-cd frontend
-
-Install Frontend Dependencies:
-bash
+Install Frontend Dependencies
 
 npm install
-
 Run the Frontend:
-bash
 
 npm start
-
 The React app should start on http://localhost:3000.
 
 Ensure the backend is running, as the frontend makes API calls to http://localhost:5000 (or the deployed backend URL).
@@ -142,11 +124,8 @@ Frontend Deployment (Vercel)
 The frontend is deployed on Vercel.
 Deploy to Vercel:
 Navigate to the frontend directory:
-bash
-
 cd frontend
 vercel
-
 Follow the prompts to deploy the frontend.
 
 Vercel will detect the React app and configure it automatically.
@@ -219,6 +198,7 @@ This project is licensed under the MIT License.
 Contact
 For any issues or inquiries, please contact maniyadhav997.
 
+
 ---
 
 ### **Step 2: Stage, Commit, and Push the `README.md`**
@@ -226,17 +206,10 @@ For any issues or inquiries, please contact maniyadhav997.
 1. **Stage the `README.md` File**:
    ```powershell
    git add README.md
-
 Commit the Changes:
-powershell
-
 git commit -m "Add README.md with project setup and deployment instructions"
-
 Push to GitHub:
-powershell
-
 git push origin main
-
 Step 3: Verify on GitHub
 Go to https://github.com/maniyadhav997/LoanManager1.
 
@@ -247,11 +220,8 @@ GitHub will render the Markdown content. Ensure the formatting looks good and al
 Step 4: Test the Setup Instructions
 To ensure the README.md instructions are accurate, follow them to set up a fresh clone of the repository:
 Clone the Repository:
-powershell
-
 git clone https://github.com/maniyadhav997/LoanManager1.git
 cd LoanManager1
-
 Set Up the Backend:
 Follow the backend setup steps (install dependencies, set up .env, run the server).
 
@@ -266,12 +236,10 @@ Test the Application:
 Log in with the test credentials and verify all features work.
 
 If you encounter any issues, update the README.md accordingly and push the changes.
+
 Step 5: Delete the Empty LoanManager_frontend Folder (Optional)
 Since LoanManager_frontend is now empty, you can delete it to clean up your local directory:
-powershell
 
 cd C:\Users\yadav\OneDrive\Desktop\LoanManager
 rmdir LoanManager_frontend
-
 This step doesn’t affect the Git repository, as LoanManager_frontend was never part of it.
-
