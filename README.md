@@ -227,8 +227,4 @@ This project is licensed under the **MIT License**.
 
 For queries or support, contact **[maniyadhav997](https://github.com/maniyadhav997)**
 
-```
 
----
-
-```
