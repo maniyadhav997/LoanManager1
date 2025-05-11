@@ -1,10 +1,11 @@
-# LoanManager
+LoanManager
 
 LoanManager is a full-stack web application for managing loan applications. Users can apply for loans, admins can view all applications, and verifiers can approve or reject applications. The backend is built with Node.js, Express, and MongoDB, while the frontend is built with React.
 
 ## Repository Structure
 
 The repository contains both the backend and frontend code in the following structure:
+
 LoanManager_backend/
 ├── models/           # Backend models (Mongoose schemas)
 ├── routes/           # Backend API routes
@@ -17,7 +18,6 @@ LoanManager_backend/
 │   └── ...
 ├── .gitignore
 └── README.md
-
 
 ## Features
 
@@ -43,6 +43,7 @@ Before running the project, ensure you have the following installed:
 ```bash
 git clone https://github.com/maniyadhav997/LoanManager1.git
 cd LoanManager1
+
 2. Backend Setup
 Install Backend Dependencies:
 bash
@@ -273,3 +274,4 @@ cd C:\Users\yadav\OneDrive\Desktop\LoanManager
 rmdir LoanManager_frontend
 
 This step doesn’t affect the Git repository, as LoanManager_frontend was never part of it.
+
